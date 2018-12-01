@@ -1,0 +1,46 @@
+version: "3.3"
+networks:
+  scrapping_net:
+
+services:
+  redis:
+    image: redis:latest
+    networks:
+      scrapping_net:
+        aliases:
+          - redis
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:latest
+    networks:
+      scrapping_net:
+        aliases:
+        - rabbitmq
+    ports:
+      - target: 5672
+        published: 1235
+        mode: host
+
+  scrapper:
+    image: scrapper:latest
+    ports:
+      - target: 8000
+        published: 1237
+        mode: host
+    volumes:
+      - type: bind
+        source: ./app/
+        target: /app/
+    networks:
+      scrapping_net:
+        aliases:
+        - scrapper
+    environment:
+    - "PYTHONUNBUFFERED=0"
+    - "TASKS_REDIS_URI=redis://redis:6379"
+    - "AMQP_URI=pyamqp://guest@rabbitmq"
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - redis

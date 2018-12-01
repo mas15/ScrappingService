@@ -1,0 +1,5 @@
+AMQP_URI: 'pyamqp://guest@rabbitmq'
+max_workers: 10
+
+REDIS_URIS:
+ tasks_statuses: "redis://redis:6379"
