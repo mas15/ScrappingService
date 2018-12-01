@@ -9,9 +9,10 @@ Funkcjonalność
 
 ## Getting Started
 
-Serwis dostaje zapytania poprzez RESTowe API wystawione przez jeden z serwisów.
-Serwis z API wysyła zadanie pobrania zasobów konkretnej strony internetowej.
-Zadania są kolejkowane w Rabbicie i serwis w miare możliwosci
+Aplikacja dostaje zapytania poprzez RESTowe API wystawione przez jeden z serwisów.
+Serwis z API wysyła zadanie pobrania zasobów konkretnej strony internetowej do 
+serwisu scrape'ującego.
+Zadania są kolejkowane w Rabbicie i serwis scrape'ujący w miare możliwosci
  pobiera kolejne (liczba wykonywanych zadań zależy odilości workerów (domyślnie 10)).
  
  Kod nie sprawdza zbytnio wyjątków i innych nieprzewidzianych sytuacji.
