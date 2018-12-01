@@ -9,6 +9,15 @@ Funkcjonalność
 
 ## Getting Started
 
+Serwis dostaje zapytania poprzez RESTowe API wystawione przez jeden z serwisów.
+Serwis z API wysyła zadanie pobrania zasobów konkretnej strony internetowej.
+Zadania są kolejkowane w Rabbicie i serwis w miare możliwosci
+ pobiera kolejne (liczba wykonywanych zadań zależy odilości workerów (domyślnie 10)).
+ 
+ Kod nie sprawdza zbytnio wyjątków i innych nieprzewidzianych sytuacji.
+ W celu lepszego crawlowania (np zaciągania danych z kolejnych podstron 
+ na wybranej domenie trzebaby użyć normalnie scrapy'iego.
+
 ### Prerequisites
 
 To run a service you need docker and docker-compose.
@@ -23,10 +32,11 @@ To run service locally and run tests you will need:
 ## Deployment
 
 Docker images are build using Dockerfile.
-To build the image:
+To build the image run:
+
 `docker build -t scrapper_base .`
 
-Just run the stack with command:
+And run the stack with command:
 
 `docker-compose up`
 
@@ -34,7 +44,9 @@ Just run the stack with command:
 
 Having requirements installed:
 
-`python -m pytest app/tests`
+`cd app`
+
+`python -m pytest tests`
 
 ## Built With
 
